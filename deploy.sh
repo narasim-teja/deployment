@@ -2,30 +2,27 @@
 
 # Default to staging
 ENV="staging"
-IMAGE="ghcr.io/narasim-teja/fastlane:staging"
-COMPOSE_FILE="compose.staging.yml"
 
 # Parse command line arguments
-while [[ $# -gt 0 ]]; do
+if [[ $# -gt 0 ]]; then
   case $1 in
     --staging)
       ENV="staging"
-      IMAGE="ghcr.io/narasim-teja/fastlane:staging"
-      COMPOSE_FILE="compose.staging.yml"
-      shift
       ;;
     --prod|--production)
       ENV="production"
-      IMAGE="ghcr.io/narasim-teja/fastlane:latest"
-      COMPOSE_FILE="compose.prod.yml"
-      shift
       ;;
     *)
       echo "Unknown option $1"
       exit 1
       ;;
   esac
-done
+  shift
+fi
+
+# Set image and compose file based on the environment
+IMAGE="ghcr.io/narasim-teja/fastlane:${ENV}"
+COMPOSE_FILE="compose.${ENV}.yml"
 
 echo
 echo ">>> Pulling the ${ENV^} Docker image..."
