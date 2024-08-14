@@ -1,0 +1,18 @@
+services:
+  fastlane-prod:
+    image: "ghcr.io/narasim-teja/fastlane:latest"
+    container_name: fastlane_prod
+    env_file:
+      - .env
+    ports:
+      - "3000:3000"
+    networks:
+      - app-network
+    restart: unless-stopped
+
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  fastlane:

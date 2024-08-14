@@ -1,0 +1,18 @@
+services:
+  fastlane-staging:
+    image: "ghcr.io/narasim-teja/fastlane:staging"
+    container_name: fastlane_staging
+    env_file:
+      - .env
+    ports:
+      - "3001:3001"
+    networks:
+      - app-network
+    restart: unless-stopped
+
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  fastlane:

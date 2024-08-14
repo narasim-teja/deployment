@@ -1,0 +1,11 @@
+fastlane.run {
+	reverse_proxy :3000
+}
+
+www.fastlane.run {
+	reverse_proxy :3000
+}
+
+staging.fastlane.run {
+	reverse_proxy :3001
+}
