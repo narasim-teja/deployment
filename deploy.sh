@@ -1,16 +1,19 @@
 #!/bin/bash
 
 # Default to staging
-ENV="staging"
+ENV="staging" # staging or production
+TAG="staging" # latest or staging
 
 # Parse command line arguments
 if [[ $# -gt 0 ]]; then
   case $1 in
     --staging)
       ENV="staging"
+      TAG="staging"
       ;;
     --prod|--production)
       ENV="production"
+      TAG="latest"
       ;;
     *)
       echo "Unknown option $1"
@@ -21,7 +24,7 @@ if [[ $# -gt 0 ]]; then
 fi
 
 # Set image and compose file based on the environment
-IMAGE="ghcr.io/narasim-teja/fastlane:${ENV}"
+IMAGE="ghcr.io/narasim-teja/fastlane:${TAG}"
 COMPOSE_FILE="compose.${ENV}.yml"
 
 echo
